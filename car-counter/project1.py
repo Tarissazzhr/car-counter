@@ -3,12 +3,11 @@ import numpy as np
 import cv2
 import cvzone
 import math
-from sort import *
+from sort import*
 
 cap = cv2.VideoCapture("C:/Users/Tarisa/Visual Studio Code/cb/videos/cars.mp4") #for video
 
-
-model = YOLO("../yolo-weights/yolov8l.pt")
+model = YOLO("../yolo-weights/yolov8n.pt")
 
 classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
               "traffic light", "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat",

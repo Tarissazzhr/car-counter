@@ -1,0 +1,2 @@
+
+        cvzone.putTextRect(img, f'{int(id)}', (max(0, x1), max(35, y1)),
