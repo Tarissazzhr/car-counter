@@ -78,7 +78,7 @@ while True:
         x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
         w, h = x2 - x1, y2 - y1
         cvzone.cornerRect(img,(x1,y1,w,h),l=9,rt=2,colorR=(255,0,255))
-        cvzone.putTextRect(img,f'{id}',(max(0, x1), max(35, y1)),
+        cvzone.putTextRect(img,f'{currentClass} {conf}',(max(0, x1), max(35, y1)),
                                scale=2,thickness=3,offset=10)
         
         cx, cy = x1 + w // 2, y1 + h // 2

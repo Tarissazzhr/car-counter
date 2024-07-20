@@ -5,7 +5,9 @@ import cvzone
 import math
 from sort import*
 
-cap = cv2.VideoCapture("C:/Users/Tarisa/Visual Studio Code/cb/videos/vidjalan.mp4") #for video
+#ini ubah nama yang diatas, car/truck/bus
+
+cap = cv2.VideoCapture("C:/Users/Tarisa/Visual Studio Code/cb/videos/cars.mp4") #for video
 
 model = YOLO("../yolo-weights/yolov8n.pt")
 
@@ -21,12 +23,12 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
               "teddy bear", "hair drier", "toothbrush"
               ]
 
-mask = cv2.imread("C:/Users/Tarisa/Visual Studio Code/cb/car-counter/mask2.png")
+mask = cv2.imread("C:/Users/Tarisa/Visual Studio Code/cb/car-counter/mask.png")
 
 #tracking
 tracker = Sort(max_age=20, min_hits=3, iou_threshold=0.3)
 
-limits = [600,400,800,400]
+limits = [150,350,700,350]
 totalCount_car = []
 totalCount_truck = []
 totalCount_bus = []
@@ -78,8 +80,8 @@ while True:
         x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
         w, h = x2 - x1, y2 - y1
         cvzone.cornerRect(img,(x1,y1,w,h),l=9,rt=2,colorR=(255,0,255))
-        cvzone.putTextRect(img,f'{id}',(max(0, x1), max(35, y1)),
-                               scale=2,thickness=3,offset=10)
+        cvzone.putTextRect(img,f'{currentClass} {conf}',(max(0, x1), max(35, y1)),
+                               scale=1,thickness=1,offset=5)  # Adjusted scale and thickness
         
         cx, cy = x1 + w // 2, y1 + h // 2
         cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
@@ -95,9 +97,9 @@ while True:
                 totalCount_bus.append(id)
                 cv2.line(img, (limits[0], limits[1]), (limits[2], limits[3]), (0, 255, 0), 5)
  
-    cvzone.putTextRect(img, f'Car Count: {len(totalCount_car)}', (50, 50))
-    cvzone.putTextRect(img, f'Truck Count: {len(totalCount_truck)}', (50, 100))
-    cvzone.putTextRect(img, f'Bus Count: {len(totalCount_bus)}', (50, 150))
+    cvzone.putTextRect(img, f'Car Count: {len(totalCount_car)}', (50, 50), scale=1, thickness=1)  # Adjusted scale and thickness
+    cvzone.putTextRect(img, f'Truck Count: {len(totalCount_truck)}', (50, 100), scale=1, thickness=1)  # Adjusted scale and thickness
+    cvzone.putTextRect(img, f'Bus Count: {len(totalCount_bus)}', (50, 150), scale=1, thickness=1)  # Adjusted scale and thickness
 
     cv2.imshow("Image", img)
     # cv2.imshow("ImageRegion", imgRegion)
